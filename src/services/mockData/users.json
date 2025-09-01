@@ -1,0 +1,203 @@
+[
+  {
+    "Id": 1,
+    "name": "Sarah Johnson",
+    "email": "sarah.johnson@company.com",
+    "qrCode": "QR_001_SJ",
+    "rfidTag": "RFID_001_SJ",
+    "photo": "/images/users/sarah.jpg"
+  },
+  {
+    "Id": 2,
+    "name": "Michael Chen",
+    "email": "michael.chen@company.com",
+    "qrCode": "QR_002_MC",
+    "rfidTag": "RFID_002_MC",
+    "photo": "/images/users/michael.jpg"
+  },
+  {
+    "Id": 3,
+    "name": "Emma Davis",
+    "email": "emma.davis@company.com",
+    "qrCode": "QR_003_ED",
+    "rfidTag": "RFID_003_ED",
+    "photo": "/images/users/emma.jpg"
+  },
+  {
+    "Id": 4,
+    "name": "James Wilson",
+    "email": "james.wilson@company.com",
+    "qrCode": "QR_004_JW",
+    "rfidTag": "RFID_004_JW",
+    "photo": "/images/users/james.jpg"
+  },
+  {
+    "Id": 5,
+    "name": "Lisa Martinez",
+    "email": "lisa.martinez@company.com",
+    "qrCode": "QR_005_LM",
+    "rfidTag": "RFID_005_LM",
+    "photo": "/images/users/lisa.jpg"
+  },
+  {
+    "Id": 6,
+    "name": "David Brown",
+    "email": "david.brown@company.com",
+    "qrCode": "QR_006_DB",
+    "rfidTag": "RFID_006_DB",
+    "photo": "/images/users/david.jpg"
+  },"smart attendance system using QR code", "RFID", "or facial recognition",
+
+   {
+    "Id": 7,
+    "name": "Jennifer Taylor",
+    "email": "jennifer.taylor@company.com",
+    "qrCode": "QR_007_JT",
+    "rfidTag": "RFID_007_JT",
+    "photo": "/images/users/jennifer.jpg"
+  },
+  {
+    "Id": 8,
+    "name": "Robert Anderson",
+    "email": "robert.anderson@company.com",
+    "qrCode": "QR_008_RA",
+    "rfidTag": "RFID_008_RA",
+    "photo": "/images/users/robert.jpg"
+  },
+  {
+    "Id": 9,
+    "name": "Amanda White",
+    "email": "amanda.white@company.com",
+    "qrCode": "QR_009_AW",
+    "rfidTag": "RFID_009_AW",
+    "photo": "/images/users/amanda.jpg"
+  },
+  {
+    "Id": 10,
+    "name": "Kevin Garcia",
+    "email": "kevin.garcia@company.com",
+    "qrCode": "QR_010_KG",
+    "rfidTag": "RFID_010_KG",
+    "photo": "/images/users/kevin.jpg"
+  },
+  {
+    "Id": 11,
+    "name": "Nicole Rodriguez",
+    "email": "nicole.rodriguez@company.com",
+    "qrCode": "QR_011_NR",
+    "rfidTag": "RFID_011_NR",
+    "photo": "/images/users/nicole.jpg"
+  },
+  {
+    "Id": 12,
+    "name": "Christopher Lee",
+    "email": "christopher.lee@company.com",
+    "qrCode": "QR_012_CL",
+    "rfidTag": "RFID_012_CL",
+    "photo": "/images/users/christopher.jpg"
+  },
+  {
+    "Id": 13,
+    "name": "Michelle Thompson",
+    "email": "michelle.thompson@company.com",
+    "qrCode": "QR_013_MT",
+    "rfidTag": "RFID_013_MT",
+    "photo": "/images/users/michelle.jpg"
+  },
+  {
+    "Id": 14,
+    "name": "Daniel Kim",
+    "email": "daniel.kim@company.com",
+    "qrCode": "QR_014_DK",
+    "rfidTag": "RFID_014_DK",
+    "photo": "/images/users/daniel.jpg"
+  },
+  {
+    "Id": 15,
+    "name": "Ashley Miller",
+    "email": "ashley.miller@company.com",
+    "qrCode": "QR_015_AM",
+    "rfidTag": "RFID_015_AM",
+    "photo": "/images/users/ashley.jpg"
+  },
+  {
+    "Id": 16,
+    "name": "Ryan Johnson",
+    "email": "ryan.johnson@company.com",
+    "qrCode": "QR_016_RJ",
+    "rfidTag": "RFID_016_RJ",
+    "photo": "/images/users/ryan.jpg"
+  },
+  {
+    "Id": 17,
+    "name": "Stephanie Davis",
+    "email": "stephanie.davis@company.com",
+    "qrCode": "QR_017_SD",
+    "rfidTag": "RFID_017_SD",
+    "photo": "/images/users/stephanie.jpg"
+  },
+  {
+    "Id": 18,
+    "name": "Matthew Wilson",
+    "email": "matthew.wilson@company.com",
+    "qrCode": "QR_018_MW",
+    "rfidTag": "RFID_018_MW",
+    "photo": "/images/users/matthew.jpg"
+  },
+  {
+    "Id": 19,
+    "name": "Rachel Brown",
+    "email": "rachel.brown@company.com",
+    "qrCode": "QR_019_RB",
+    "rfidTag": "RFID_019_RB",
+    "photo": "/images/users/rachel.jpg"
+  },
+  {
+    "Id": 20,
+    "name": "Alexander Taylor",
+    "email": "alexander.taylor@company.com",
+    "qrCode": "QR_020_AT",
+    "rfidTag": "RFID_020_AT",
+    "photo": "/images/users/alexander.jpg"
+  },
+  {
+    "Id": 21,
+    "name": "USR001",
+    "email": "user001@example.com",
+    "qrCode": "QR_USR001",
+    "rfidTag": "RFID_USR001",
+    "photo": "/images/users/usr001.jpg"
+  },
+  {
+    "Id": 22,
+    "name": "USR002",
+    "email": "user002@example.com",
+    "qrCode": "QR_USR002",
+    "rfidTag": "RFID_USR002",
+    "photo": "/images/users/usr002.jpg"
+  },
+  {
+    "Id": 23,
+    "name": "USR003",
+    "email": "user003@example.com",
+    "qrCode": "QR_USR003",
+    "rfidTag": "RFID_USR003",
+    "photo": "/images/users/usr003.jpg"
+  },
+  {
+    "Id": 24,
+    "name": "USR004",
+    "email": "user004@example.com",
+    "qrCode": "QR_USR004",
+    "rfidTag": "RFID_USR004",
+    "photo": "/images/users/usr004.jpg"
+  },
+  {
+    "Id": 25,
+    "name": "USR005",
+    "email": "user005@example.com",
+    "qrCode": "QR_USR005",
+    "rfidTag": "RFID_USR005",
+    "photo": "/images/users/usr005.jpg"
+  }
+]
