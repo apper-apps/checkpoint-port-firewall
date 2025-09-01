@@ -24,11 +24,11 @@ const ActivityFeed = ({ className, refreshTrigger, limit = 10 }) => {
       setError("")
       
       const today = format(new Date(), "yyyy-MM-dd")
-      const records = await attendanceService.getByDate(today)
+const records = await attendanceService.getByDate(today)
       
       // Sort by check-in time and limit results
       const sorted = records
-        .sort((a, b) => new Date(b.checkInTime) - new Date(a.checkInTime))
+        .sort((a, b) => new Date(b.check_in_time_c) - new Date(a.check_in_time_c))
         .slice(0, limit)
       
       setActivities(sorted)

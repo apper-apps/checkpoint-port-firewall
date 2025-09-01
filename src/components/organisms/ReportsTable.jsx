@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react"
-import { cn } from "@/utils/cn"
-import Card from "@/components/atoms/Card"
-import Button from "@/components/atoms/Button"
-import Select from "@/components/atoms/Select"
-import Badge from "@/components/atoms/Badge"
-import SearchBar from "@/components/molecules/SearchBar"
-import Loading from "@/components/ui/Loading"
-import Error from "@/components/ui/Error"
-import Empty from "@/components/ui/Empty"
-import ApperIcon from "@/components/ApperIcon"
-import attendanceService from "@/services/api/attendanceService"
-import { format } from "date-fns"
-import { toast } from "react-toastify"
+import React, { useEffect, useState } from "react";
+import { format } from "date-fns";
+import { toast } from "react-toastify";
+import { cn } from "@/utils/cn";
+import attendanceService from "@/services/api/attendanceService";
+import ApperIcon from "@/components/ApperIcon";
+import SearchBar from "@/components/molecules/SearchBar";
+import Error from "@/components/ui/Error";
+import Empty from "@/components/ui/Empty";
+import Loading from "@/components/ui/Loading";
+import Select from "@/components/atoms/Select";
+import Badge from "@/components/atoms/Badge";
+import Button from "@/components/atoms/Button";
+import Card from "@/components/atoms/Card";
 
 const ReportsTable = ({ className }) => {
   const [records, setRecords] = useState([])
@@ -51,24 +51,24 @@ const ReportsTable = ({ className }) => {
     let filtered = [...records]
 
     // Apply search filter
-    if (searchTerm) {
+if (searchTerm) {
       filtered = filtered.filter(record =>
-        record.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        record.userId.toLowerCase().includes(searchTerm.toLowerCase())
+        record.user_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        record.user_id_c?.toString().toLowerCase().includes(searchTerm.toLowerCase())
       )
     }
 
     // Apply status filter
     if (statusFilter !== "all") {
-      filtered = filtered.filter(record => record.status === statusFilter)
+      filtered = filtered.filter(record => record.status_c === statusFilter)
     }
 
-    // Apply sorting
+// Apply sorting
     filtered.sort((a, b) => {
       let aValue = a[sortField]
       let bValue = b[sortField]
 
-      if (sortField === "checkInTime" || sortField === "checkOutTime") {
+      if (sortField === "check_in_time_c" || sortField === "check_out_time_c") {
         aValue = new Date(aValue || 0)
         bValue = new Date(bValue || 0)
       }
@@ -100,12 +100,12 @@ const ReportsTable = ({ className }) => {
     const csvContent = [
       headers.join(","),
       ...filteredRecords.map(record => [
-        record.userName,
-        record.userId,
-        format(new Date(record.checkInTime), "yyyy-MM-dd HH:mm:ss"),
-        record.checkOutTime ? format(new Date(record.checkOutTime), "yyyy-MM-dd HH:mm:ss") : "",
-        record.status,
-        record.method
+record.user_name_c,
+        record.user_id_c,
+        format(new Date(record.check_in_time_c), "yyyy-MM-dd HH:mm:ss"),
+        record.check_out_time_c ? format(new Date(record.check_out_time_c), "yyyy-MM-dd HH:mm:ss") : "",
+        record.status_c,
+        record.method_c
       ].join(","))
     ].join("\n")
 
@@ -181,19 +181,19 @@ const ReportsTable = ({ className }) => {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead>
+<thead>
               <tr className="border-b border-gray-200">
                 <th className="text-left py-3 px-4 font-medium text-gray-700">
-                  <SortButton field="userName">Name</SortButton>
+                  <SortButton field="user_name_c">Name</SortButton>
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-gray-700">
-                  <SortButton field="checkInTime">Check-in</SortButton>
+                  <SortButton field="check_in_time_c">Check-in</SortButton>
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-gray-700">
-                  <SortButton field="method">Method</SortButton>
+                  <SortButton field="method_c">Method</SortButton>
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-gray-700">
-                  <SortButton field="status">Status</SortButton>
+                  <SortButton field="status_c">Status</SortButton>
                 </th>
                 <th className="text-left py-3 px-4 font-medium text-gray-700">Duration</th>
               </tr>
@@ -215,36 +215,36 @@ const ReportsTable = ({ className }) => {
                     key={record.Id}
                     className="border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200"
                   >
-                    <td className="py-3 px-4">
-                      <div className="font-medium text-gray-900">{record.userName}</div>
-                      <div className="text-sm text-gray-500">{record.userId}</div>
+<td className="py-3 px-4">
+                      <div className="font-medium text-gray-900">{record.user_name_c}</div>
+                      <div className="text-sm text-gray-500">{record.user_id_c}</div>
                     </td>
                     <td className="py-3 px-4">
                       <div className="text-sm text-gray-900">
-                        {format(new Date(record.checkInTime), "HH:mm")}
+                        {format(new Date(record.check_in_time_c), "HH:mm")}
                       </div>
                       <div className="text-xs text-gray-500">
-                        {format(new Date(record.checkInTime), "MMM dd")}
+                        {format(new Date(record.check_in_time_c), "MMM dd")}
                       </div>
                     </td>
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <ApperIcon
-                          name={record.method === "QR Code" ? "QrCode" : record.method === "RFID" ? "CreditCard" : "User"}
+                          name={record.method_c === "QR Code" ? "QrCode" : record.method_c === "RFID" ? "CreditCard" : "User"}
                           className="h-4 w-4"
                         />
-                        {record.method}
+                        {record.method_c}
                       </div>
                     </td>
                     <td className="py-3 px-4">
-                      <Badge variant={getStatusVariant(record.status)}>
-                        {record.status}
+                      <Badge variant={getStatusVariant(record.status_c)}>
+                        {record.status_c}
                       </Badge>
                     </td>
                     <td className="py-3 px-4 text-sm text-gray-600">
-                      {record.checkOutTime
+                      {record.check_out_time_c
                         ? (() => {
-                            const duration = new Date(record.checkOutTime) - new Date(record.checkInTime)
+                            const duration = new Date(record.check_out_time_c) - new Date(record.check_in_time_c)
                             const hours = Math.floor(duration / (1000 * 60 * 60))
                             const minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60))
                             return `${hours}h ${minutes}m`

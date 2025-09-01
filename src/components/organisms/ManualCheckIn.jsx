@@ -21,10 +21,10 @@ const ManualCheckIn = ({ onCheckIn, className }) => {
     setSearchTerm(term)
     if (term.length >= 2) {
       try {
-        const allUsers = await userService.getAll()
+const allUsers = await userService.getAll()
         const filtered = allUsers.filter(user => 
-          user.name.toLowerCase().includes(term.toLowerCase()) ||
-          user.email.toLowerCase().includes(term.toLowerCase())
+          user.Name.toLowerCase().includes(term.toLowerCase()) ||
+          user.email_c.toLowerCase().includes(term.toLowerCase())
         )
         setUsers(filtered.slice(0, 10)) // Limit to 10 results
       } catch (error) {
@@ -98,14 +98,14 @@ const ManualCheckIn = ({ onCheckIn, className }) => {
                     key={user.Id}
                     type="button"
                     onClick={() => {
-                      setSelectedUser(user.Id)
-                      setSearchTerm(user.name)
+setSelectedUser(user.Id)
+                      setSearchTerm(user.Name)
                       setUsers([])
                     }}
                     className="w-full text-left px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 transition-colors duration-200"
                   >
-                    <div className="font-medium text-gray-900">{user.name}</div>
-                    <div className="text-sm text-gray-500">{user.email}</div>
+<div className="font-medium text-gray-900">{user.Name}</div>
+                    <div className="text-sm text-gray-500">{user.email_c}</div>
                   </button>
                 ))}
               </div>

@@ -30,11 +30,11 @@ const AttendanceChart = ({ className }) => {
       for (let i = 6; i >= 0; i--) {
         const date = subDays(new Date(), i)
         const dateStr = format(date, "yyyy-MM-dd")
-        const records = await attendanceService.getByDate(dateStr)
+const records = await attendanceService.getByDate(dateStr)
         
         days.push(format(date, "MMM dd"))
-        presentCounts.push(records.filter(r => r.status === "Present").length)
-        lateCounts.push(records.filter(r => r.status === "Late").length)
+        presentCounts.push(records.filter(r => r.status_c === "Present").length)
+        lateCounts.push(records.filter(r => r.status_c === "Late").length)
       }
 
       const options = {

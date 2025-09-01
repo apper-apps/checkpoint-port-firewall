@@ -25,13 +25,13 @@ const LiveStats = ({ className, refreshTrigger }) => {
       setLoading(true)
       setError("")
       
-      const today = format(new Date(), "yyyy-MM-dd")
+const today = format(new Date(), "yyyy-MM-dd")
       const todayRecords = await attendanceService.getByDate(today)
       
-      const present = todayRecords.filter(r => r.status === "Present" || r.status === "Late").length
+      const present = todayRecords.filter(r => r.status_c === "Present" || r.status_c === "Late").length
       const rate = Math.round((present / stats.totalRegistered) * 100)
       const recent = todayRecords.filter(r => {
-        const checkInTime = new Date(r.checkInTime)
+        const checkInTime = new Date(r.check_in_time_c)
         const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000)
         return checkInTime >= oneHourAgo
       }).length

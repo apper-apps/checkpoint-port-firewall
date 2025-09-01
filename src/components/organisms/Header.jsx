@@ -1,13 +1,15 @@
-import React, { useState } from "react"
-import { Link, useLocation } from "react-router-dom"
-import { cn } from "@/utils/cn"
-import ApperIcon from "@/components/ApperIcon"
-import Button from "@/components/atoms/Button"
-import { motion, AnimatePresence } from "framer-motion"
+import React, { useContext, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { AuthContext } from "@/App";
+import { cn } from "@/utils/cn";
+import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
 
 const Header = () => {
   const location = useLocation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { logout } = useContext(AuthContext)
 
   const navigation = [
     { name: "Check-in", href: "/check-in", icon: "Scan" },
@@ -50,7 +52,19 @@ const Header = () => {
                   <span>{item.name}</span>
                 </Link>
               ))}
-            </nav>
+</nav>
+
+            {/* Logout Button */}
+            <div className="hidden md:flex items-center ml-4">
+              <Button
+                variant="ghost"
+                onClick={logout}
+                className="flex items-center space-x-2"
+              >
+                <ApperIcon name="LogOut" className="h-4 w-4" />
+                <span>Logout</span>
+              </Button>
+            </div>
 
             {/* Mobile menu button */}
             <Button
@@ -108,11 +122,23 @@ const Header = () => {
                           : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                       )}
                     >
-                      <ApperIcon name={item.icon} className="h-5 w-5" />
+<ApperIcon name={item.icon} className="h-5 w-5" />
                       <span>{item.name}</span>
                     </Link>
                   ))}
-                </nav>
+                  
+                  {/* Mobile Logout Button */}
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      setMobileMenuOpen(false)
+                      logout()
+                    }}
+                    className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 text-gray-700 hover:bg-gray-100 hover:text-gray-900 justify-start"
+                  >
+                    <ApperIcon name="LogOut" className="h-5 w-5" />
+                    <span>Logout</span>
+                  </Button>
               </div>
             </motion.div>
           </>

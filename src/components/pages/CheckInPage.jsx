@@ -14,24 +14,24 @@ const CheckInPage = () => {
     try {
       // Get user info
       let user
-      try {
+try {
         user = await userService.getById(checkInData.userId)
       } catch {
         // Create a mock user if not found
         user = {
           Id: checkInData.userId,
-          name: `User ${checkInData.userId}`,
-          email: `${checkInData.userId}@example.com`
+          Name: `User ${checkInData.userId}`,
+          email_c: `${checkInData.userId}@example.com`
         }
       }
 
       // Create attendance record
-      const attendanceRecord = {
-        userId: user.Id,
-        userName: user.name,
-        checkInTime: checkInData.timestamp,
-        method: checkInData.method,
-        status: "Present"
+const attendanceRecord = {
+        user_id_c: user.Id,
+        user_name_c: user.Name,
+        check_in_time_c: checkInData.timestamp,
+        method_c: checkInData.method,
+        status_c: "Present"
       }
 
       await attendanceService.create(attendanceRecord)

@@ -1,92 +1,449 @@
-import attendanceData from "@/services/mockData/attendance.json"
-
 class AttendanceService {
   constructor() {
-    // Initialize with mock data
-    this.data = [...attendanceData]
+    // Initialize ApperClient with Project ID and Public Key
+    const { ApperClient } = window.ApperSDK
+    this.apperClient = new ApperClient({
+      apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+      apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+    })
+    this.tableName = 'attendance_c'
   }
 
   async getAll() {
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 300))
-    return [...this.data]
+    try {
+      const params = {
+        "fields": [
+          {
+            "field": {
+              "Name": "Name"
+            }
+          },
+          {
+            "field": {
+              "Name": "user_id_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "user_name_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "check_in_time_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "check_out_time_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "method_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "status_c"
+            }
+          }
+        ],
+        "pagingInfo": {
+          "limit": 200,
+          "offset": 0
+        },
+        "orderBy": [
+          {
+            "fieldName": "check_in_time_c",
+            "sorttype": "DESC"
+          }
+        ]
+      }
+      
+      const response = await this.apperClient.fetchRecords(this.tableName, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      return response.data || []
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching attendance records:", error?.response?.data?.message)
+        throw new Error(error.response.data.message)
+      } else {
+        console.error(error)
+        throw error
+      }
+    }
   }
 
   async getById(id) {
-    await new Promise(resolve => setTimeout(resolve, 200))
-    const record = this.data.find(item => item.Id === parseInt(id))
-    if (!record) {
-      throw new Error("Attendance record not found")
+    try {
+      const params = {
+        "fields": [
+          {
+            "field": {
+              "Name": "Name"
+            }
+          },
+          {
+            "field": {
+              "Name": "user_id_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "user_name_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "check_in_time_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "check_out_time_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "method_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "status_c"
+            }
+          }
+        ]
+      }
+      
+      const response = await this.apperClient.getRecordById(this.tableName, parseInt(id), params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      return response.data
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching attendance record:", error?.response?.data?.message)
+        throw new Error(error.response.data.message)
+      } else {
+        console.error(error)
+        throw error
+      }
     }
-    return { ...record }
   }
 
   async getByDate(date) {
-    await new Promise(resolve => setTimeout(resolve, 250))
-    const targetDate = new Date(date).toISOString().split('T')[0]
-    return this.data
-      .filter(record => {
-        const recordDate = new Date(record.checkInTime).toISOString().split('T')[0]
-        return recordDate === targetDate
-      })
-      .map(record => ({ ...record }))
+    try {
+      const targetDate = new Date(date).toISOString().split('T')[0]
+      
+      const params = {
+        "fields": [
+          {
+            "field": {
+              "Name": "Name"
+            }
+          },
+          {
+            "field": {
+              "Name": "user_id_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "user_name_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "check_in_time_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "check_out_time_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "method_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "status_c"
+            }
+          }
+        ],
+        "where": [
+          {
+            "FieldName": "check_in_time_c",
+            "Operator": "RelativeMatch",
+            "Values": [targetDate]
+          }
+        ],
+        "orderBy": [
+          {
+            "fieldName": "check_in_time_c",
+            "sorttype": "DESC"
+          }
+        ]
+      }
+      
+      const response = await this.apperClient.fetchRecords(this.tableName, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      return response.data || []
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching attendance by date:", error?.response?.data?.message)
+        throw new Error(error.response.data.message)
+      } else {
+        console.error(error)
+        throw error
+      }
+    }
   }
 
   async getByUserId(userId) {
-    await new Promise(resolve => setTimeout(resolve, 250))
-    return this.data
-      .filter(record => record.userId === userId)
-      .map(record => ({ ...record }))
+    try {
+      const params = {
+        "fields": [
+          {
+            "field": {
+              "Name": "Name"
+            }
+          },
+          {
+            "field": {
+              "Name": "user_id_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "user_name_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "check_in_time_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "check_out_time_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "method_c"
+            }
+          },
+          {
+            "field": {
+              "Name": "status_c"
+            }
+          }
+        ],
+        "where": [
+          {
+            "FieldName": "user_id_c",
+            "Operator": "EqualTo", 
+            "Values": [parseInt(userId)]
+          }
+        ],
+        "orderBy": [
+          {
+            "fieldName": "check_in_time_c",
+            "sorttype": "DESC"
+          }
+        ]
+      }
+      
+      const response = await this.apperClient.fetchRecords(this.tableName, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      return response.data || []
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error fetching attendance by user ID:", error?.response?.data?.message)
+        throw new Error(error.response.data.message)
+      } else {
+        console.error(error)
+        throw error
+      }
+    }
   }
 
   async create(record) {
-    await new Promise(resolve => setTimeout(resolve, 400))
-    
-    const newId = Math.max(...this.data.map(item => item.Id), 0) + 1
-    const newRecord = {
-      Id: newId,
-      checkOutTime: null,
-      ...record
+    try {
+      const params = {
+        records: [
+          {
+            // Only include Updateable fields
+            Name: record.Name || `Attendance ${Date.now()}`,
+            user_id_c: parseInt(record.user_id_c || record.userId),
+            user_name_c: record.user_name_c || record.userName,
+            check_in_time_c: record.check_in_time_c || record.checkInTime,
+            check_out_time_c: record.check_out_time_c || record.checkOutTime || null,
+            method_c: record.method_c || record.method,
+            status_c: record.status_c || record.status
+          }
+        ]
+      }
+      
+      const response = await this.apperClient.createRecord(this.tableName, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      if (response.results) {
+        const successfulRecords = response.results.filter(result => result.success)
+        const failedRecords = response.results.filter(result => !result.success)
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to create attendance ${failedRecords.length} records:${JSON.stringify(failedRecords)}`)
+          
+          failedRecords.forEach(record => {
+            if (record.message) throw new Error(record.message)
+          })
+        }
+        
+        return successfulRecords.length > 0 ? successfulRecords[0].data : null
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error creating attendance record:", error?.response?.data?.message)
+        throw new Error(error.response.data.message)
+      } else {
+        console.error(error)
+        throw error
+      }
     }
-    
-    this.data.push(newRecord)
-    return { ...newRecord }
   }
 
   async update(id, updateData) {
-    await new Promise(resolve => setTimeout(resolve, 350))
-    
-    const index = this.data.findIndex(item => item.Id === parseInt(id))
-    if (index === -1) {
-      throw new Error("Attendance record not found")
+    try {
+      const params = {
+        records: [
+          {
+            Id: parseInt(id),
+            // Only include Updateable fields that are being updated
+            ...(updateData.Name !== undefined && { Name: updateData.Name }),
+            ...(updateData.user_id_c !== undefined && { user_id_c: parseInt(updateData.user_id_c) }),
+            ...(updateData.user_name_c !== undefined && { user_name_c: updateData.user_name_c }),
+            ...(updateData.check_in_time_c !== undefined && { check_in_time_c: updateData.check_in_time_c }),
+            ...(updateData.check_out_time_c !== undefined && { check_out_time_c: updateData.check_out_time_c }),
+            ...(updateData.method_c !== undefined && { method_c: updateData.method_c }),
+            ...(updateData.status_c !== undefined && { status_c: updateData.status_c })
+          }
+        ]
+      }
+      
+      const response = await this.apperClient.updateRecord(this.tableName, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      if (response.results) {
+        const successfulUpdates = response.results.filter(result => result.success)
+        const failedUpdates = response.results.filter(result => !result.success)
+        
+        if (failedUpdates.length > 0) {
+          console.error(`Failed to update attendance ${failedUpdates.length} records:${JSON.stringify(failedUpdates)}`)
+          
+          failedUpdates.forEach(record => {
+            if (record.message) throw new Error(record.message)
+          })
+        }
+        
+        return successfulUpdates.length > 0 ? successfulUpdates[0].data : null
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error updating attendance record:", error?.response?.data?.message)
+        throw new Error(error.response.data.message)
+      } else {
+        console.error(error)
+        throw error
+      }
     }
-    
-    this.data[index] = { ...this.data[index], ...updateData }
-    return { ...this.data[index] }
   }
 
   async delete(id) {
-    await new Promise(resolve => setTimeout(resolve, 300))
-    
-    const index = this.data.findIndex(item => item.Id === parseInt(id))
-    if (index === -1) {
-      throw new Error("Attendance record not found")
+    try {
+      const params = {
+        RecordIds: [parseInt(id)]
+      }
+      
+      const response = await this.apperClient.deleteRecord(this.tableName, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      if (response.results) {
+        const successfulDeletions = response.results.filter(result => result.success)
+        const failedDeletions = response.results.filter(result => !result.success)
+        
+        if (failedDeletions.length > 0) {
+          console.error(`Failed to delete attendance ${failedDeletions.length} records:${JSON.stringify(failedDeletions)}`)
+          
+          failedDeletions.forEach(record => {
+            if (record.message) throw new Error(record.message)
+          })
+        }
+        
+        return successfulDeletions.length > 0
+      }
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error deleting attendance record:", error?.response?.data?.message)
+        throw new Error(error.response.data.message)
+      } else {
+        console.error(error)
+        throw error
+      }
     }
-    
-    const deleted = this.data.splice(index, 1)[0]
-    return { ...deleted }
   }
 
   async checkOut(id) {
-    await new Promise(resolve => setTimeout(resolve, 300))
-    
-    const record = this.data.find(item => item.Id === parseInt(id))
-    if (!record) {
-      throw new Error("Attendance record not found")
+    try {
+      const updateData = {
+        check_out_time_c: new Date().toISOString()
+      }
+      
+      return await this.update(id, updateData)
+    } catch (error) {
+      if (error?.response?.data?.message) {
+        console.error("Error checking out attendance record:", error?.response?.data?.message)
+        throw new Error(error.response.data.message)
+      } else {
+        console.error(error)
+        throw error
+      }
     }
-    
-    record.checkOutTime = new Date().toISOString()
-    return { ...record }
   }
 }
 
