@@ -51,9 +51,8 @@ const Header = () => {
                   <ApperIcon name={item.icon} className="h-4 w-4" />
                   <span>{item.name}</span>
                 </Link>
-              ))}
-</nav>
-
+))}
+            </nav>
             {/* Logout Button */}
             <div className="hidden md:flex items-center ml-4">
               <Button
@@ -125,7 +124,7 @@ const Header = () => {
 <ApperIcon name={item.icon} className="h-5 w-5" />
                       <span>{item.name}</span>
                     </Link>
-                  ))}
+))}
                   
                   {/* Mobile Logout Button */}
                   <Button
@@ -139,6 +138,7 @@ const Header = () => {
                     <ApperIcon name="LogOut" className="h-5 w-5" />
                     <span>Logout</span>
                   </Button>
+                </nav>
               </div>
             </motion.div>
           </>
