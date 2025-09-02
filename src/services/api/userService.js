@@ -159,7 +159,6 @@ const response = await this.apperClient.getRecordById(this.tableName, parseInt(i
 if (!response.success) {
         console.error(response.message)
         return null
-        throw new Error(response.message)
       }
       
       if (!response.data || response.data.length === 0) {
@@ -198,7 +197,6 @@ if (!response.success) {
 if (!response.success) {
         console.error(response.message)
         return null
-        throw new Error(response.message)
       }
       
       if (response.results) {
@@ -247,7 +245,6 @@ if (!response.success) {
 if (!response.success) {
         console.error(response.message)
         return false
-        throw new Error(response.message)
       }
       
       if (response.results) {
@@ -286,7 +283,6 @@ if (!response.success) {
 if (!response.success) {
         console.error(response.message)
         return []
-        throw new Error(response.message)
       }
       
       if (response.results) {
@@ -378,7 +374,6 @@ if (!response.success) {
 if (!response.success) {
         console.error(response.message)
         return []
-        throw new Error(response.message)
       }
       
       return response.data || []
