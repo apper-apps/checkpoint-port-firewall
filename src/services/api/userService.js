@@ -48,8 +48,8 @@ class UserService {
       const response = await this.apperClient.fetchRecords(this.tableName, params)
       
       if (!response.success) {
-        console.error(response.message)
-        throw new Error(response.message)
+console.error(response.message)
+        return []
       }
       
       return response.data || []
@@ -96,11 +96,11 @@ class UserService {
         ]
       }
       
-      const response = await this.apperClient.getRecordById(this.tableName, parseInt(id), params)
+const response = await this.apperClient.getRecordById(this.tableName, parseInt(id), params)
       
       if (!response.success) {
         console.error(response.message)
-        throw new Error(response.message)
+        return null
       }
       
       return response.data
@@ -156,8 +156,9 @@ class UserService {
       
       const response = await this.apperClient.fetchRecords(this.tableName, params)
       
-      if (!response.success) {
+if (!response.success) {
         console.error(response.message)
+        return null
         throw new Error(response.message)
       }
       
@@ -194,8 +195,9 @@ class UserService {
       
       const response = await this.apperClient.createRecord(this.tableName, params)
       
-      if (!response.success) {
+if (!response.success) {
         console.error(response.message)
+        return null
         throw new Error(response.message)
       }
       
@@ -242,8 +244,9 @@ class UserService {
       
       const response = await this.apperClient.updateRecord(this.tableName, params)
       
-      if (!response.success) {
+if (!response.success) {
         console.error(response.message)
+        return false
         throw new Error(response.message)
       }
       
@@ -280,8 +283,9 @@ class UserService {
       
       const response = await this.apperClient.deleteRecord(this.tableName, params)
       
-      if (!response.success) {
+if (!response.success) {
         console.error(response.message)
+        return []
         throw new Error(response.message)
       }
       
@@ -371,8 +375,9 @@ class UserService {
       
       const response = await this.apperClient.fetchRecords(this.tableName, params)
       
-      if (!response.success) {
+if (!response.success) {
         console.error(response.message)
+        return []
         throw new Error(response.message)
       }
       

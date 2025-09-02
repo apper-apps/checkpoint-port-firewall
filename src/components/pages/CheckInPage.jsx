@@ -37,9 +37,9 @@ const attendanceRecord = {
       await attendanceService.create(attendanceRecord)
       
       // Refresh data
-      setRefreshTrigger(prev => prev + 1)
+setRefreshTrigger(prev => prev + 1)
       
-      toast.success(`${user.name} checked in successfully via ${checkInData.method}!`)
+      toast.success(`${user.Name} checked in successfully via ${checkInData.method}!`)
     } catch (error) {
       console.error("Check-in error:", error)
       toast.error("Failed to process check-in. Please try again.")
