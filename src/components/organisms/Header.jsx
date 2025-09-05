@@ -28,7 +28,7 @@ const Header = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3 group">
               <div className="w-8 h-8 bg-gradient-to-br from-primary to-blue-600 rounded-lg flex items-center justify-center group-hover:shadow-lg transition-shadow duration-200">
-                <ApperIcon name="Shield" className="h-5 w-5 text-white" />
+<ApperIcon name="Bot" className="h-5 w-5 text-white" />
               </div>
               <span className="font-display font-bold text-xl bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
                 CheckPoint Pro
